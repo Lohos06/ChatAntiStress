@@ -1,0 +1,14 @@
+<!doctype html>
+<html>
+  <body>
+    <h1>Serveur Pico OK </h1>
+    <button onclick="test()">Test /state</button>
+    <pre id="out"></pre>
+    <script>
+      async function test(){
+        const r = await fetch('/state');
+        document.getElementById('out').textContent = await r.text();
+      }
+    </script>
+  </body>
+</html>
