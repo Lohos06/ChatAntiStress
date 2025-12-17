@@ -1,14 +1,55 @@
 <!doctype html>
 <html>
+  <head>
+    <link rel="stylesheet" href="style.css">
+  </head>
   <body>
-    <h1>Serveur Pico OK ✅</h1>
-    <button onclick="test()">Test /state</button>
-    <pre id="out"></pre>
+    <h1>Chat Anti Stress 🐱</h1>
+    <button onclick="Coucou()">Afficher Coucou</button>
+
+    <h2>Boite a coucou</h2>
+    <pre id="coucou"></pre>
+
+    <h2>Boite a Stress</h2>
+    <pre id="stress"></pre>
+
+    <h2>Boite a Jeu</h2>
+    <pre id="jeu"></pre>
+
     <script>
-      async function test(){
-        const r = await fetch('/state');
-        document.getElementById('out').textContent = await r.text();
+      const CoucouContainer = document.getElementById('coucou');
+      const StressContainer = document.getElementById('stress');
+      const JeuContainer = document.getElementById('jeu');
+
+      async function Coucou(){
+          const r = await fetch('/Coucou');
+          const data = await r.json();
+          CoucouContainer.textContent = data.msg;
       }
+
+      async function Stress(){
+          const r = await fetch('/Stress');
+          const data = await r.json();
+          StressContainer.textContent = data.msg;
+      }
+
+      // Vérifie le stress toutes les secondes
+      setInterval(() => {
+        Stress();
+      }, 1000);
+
+      
+      async function Jeu(){
+          const r = await fetch('/Jeu');
+          const data = await r.json();
+          JeuContainer.textContent = data.msg;
+      }
+
+      // Vérifie le Jeu toutes les secondes
+      setInterval(() => {
+        Jeu();
+      }, 1000);
+
     </script>
   </body>
 </html>
